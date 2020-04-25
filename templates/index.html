@@ -1,0 +1,275 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="author" content="Shubham Kumar ,You Know Me :)">
+    <meta charset="UTF-8">
+    <title>Warp+ Referral Script | SkTechHub </title>
+    <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lcx4e0UAAAAACFLYYLAxe99rbLrmAtpXUVLzG2w"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<style>
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+        padding-top: 20px;
+    }
+
+    .bg {
+        background-image: url("{{ url_for('static', filename = 'images/background-laptop.jpg') }}");
+        /*        height: 100%;*/
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: black;
+    }
+
+    .links {
+        color: white;
+        opacity: 0.5;
+    }
+
+    .links:hover {
+        color: white;
+        opacity: 1;
+    }
+
+    #ques:hover {
+        cursor: pointer;
+    }
+
+    .center-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 70vh;
+    }
+
+    .modal-dialog {
+        height: 80vh !important;
+        display: flex;
+    }
+
+    .modal-content {
+        margin: auto !important;
+        height: fit-content !important;
+    }
+
+</style>
+
+<body class="bg container">
+
+    <div class="row justify-content-center align-items-center text-center">
+        <h1 style="color:white">One hub for all <span id="top-title-text">Deals</span></h1>
+    </div>
+
+    <div class="row center-screen justify-content-center align-items-center text-center  ">
+        <div id="form-data" class="col-sm-10 col-lg-6">
+            <div class="form-group">
+                <label for="config" style="color:white">Warp Configuration ID <span title="Your Warp Configuration ID" data-toggle="popover" data-content="1.Open your Warp (1.1.1.1) app.<br />2.Tap on the hamburger icon(top right corner).<br>3.Select advanced option.<br>4.Tap on Diagnostics.<br>5.Copy the id in the client configuration section." data-html="true" data-placement="bottom"><i id="ques" class="fa fa-question-circle"></i></span></label>
+                <input type="text" class="form-control" id="config" aria-describedby="confighelp">
+                <small id="confighelp" class="form-text text-left" style="color:white;opacity:0.4">We don't store the configuration id's.</small>
+            </div>
+            <button id="button-main" class="col-6 col-sm-6 col-lg-4 btn btn-light" type="button" onclick="submit()">
+                <span id="button-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none"></span>
+                <span id="button-text">Get Free Data</span>
+            </button>
+        </div>
+        <br>
+        <div class="col-12" style="display:none" id="success-box">
+            <div class="row align-items-center justify-content-center">
+                <lottie-player id='msg-anim1' class="col-12 col-md-2 " src="https://assets9.lottiefiles.com/packages/lf20_OcSwPS.json" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <lottie-player id='msg-anim2' src="https://assets2.lottiefiles.com/packages/lf20_OFPzAN.json" background="transparent" speed="0.7" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <div class="col-12 col-md-3">
+                    <p style="color:white" id="msg"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="modal" id="myModal" style="padding:20px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal body -->
+                <div class="modal-body align-items-center justify-content-center text-center">
+                    <div class="row">
+                        <lottie-player class="col" src="https://assets7.lottiefiles.com/packages/lf20_fbKGGM.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+
+                    </div>
+
+                    <h7>In the mean time while your data is being credited, consider joining our channels :)</h7>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer align-items-center justify-content-center">
+                    <button type="button" class="btn btn-dark" id="sktechhub_channel">SkTechHub Channel</button>
+                    <button type="button" class="btn btn-dark" id="sktechhub_chat">SkTech Chat</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div class="row align-items-center justify-content-center text-left">
+        <a class="links" style="margin-left:0px;" target="_blank" href="https://telegram.me/sktechhub">• SktechHub</a>
+        <a class="links" style="margin-left:20px;" target="_blank" href="https://telegram.me/sktechhub_chat">• Sktech Chat</a>
+        <a class="links" style="margin-left:20px;" target="_blank" href="https://telegram.me/codecompilebot">• CodeCompileBot</a>
+        <a class="links" style="margin-left:20px;" target="_blank" href="https://telegram.me/autoforward_msgbot">• AutoForwardBot</a>
+        <a class="links" style="margin-left:20px;" target="_blank" href="#">• DirectLinkBot</a>
+        <a class="links" style="margin-left:20px;" target="_blank" href="https://sktechhub.com">• Sktech Bomber</a>
+    </div>
+
+
+
+
+
+
+
+</body>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/ToastyWeb.umd.js') }}"></script>
+<script>
+    var captcha_token = "";
+    var counter = 0;
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6Lcx4e0UAAAAACFLYYLAxe99rbLrmAtpXUVLzG2w', {
+            action: 'homepage'
+        }).then(function(token) {
+            captcha_token = token;
+        });
+    });
+
+    $(document).ready(function() {
+        ToastyWeb.customTimeOut = 5000;
+        $('[data-toggle="popover"]').popover();
+        $(document).mouseup(function(e) {
+            if (!$(".popover").is(e.target) && 0 === $(".popover").has(e.target).length) {
+                $("[data-toggle=popover]").popover('hide');
+            }
+        });
+
+        var titles = ["Deals", "Scripts", "Bots", "Bomber", "Everything"];
+
+        function changeTitles() {
+            $("#top-title-text").removeClass("fadeIn");
+            $("#top-title-text").addClass('animated fadeOut');
+            counter++;
+            document.getElementById("top-title-text").addEventListener('animationend', function() {
+                $("#top-title-text").removeClass("fadeOut");
+                $("#top-title-text").text(titles[counter % titles.length]);
+
+                $("#top-title-text").addClass('animated fadeIn');
+            })
+
+        }
+        setInterval(changeTitles, 2500);
+
+    });
+
+    $("#sktechhub_channel").click(function() {
+        $('#myModal').modal('hide');
+        open("https://telegram.me/sktechhub", "_blank");
+    })
+    $("#sktechhub_chat").click(function() {
+        $('#myModal').modal('hide');
+        open("https://telegram.me/sktechhub_chat", "_blank");
+    })
+    $("#config").focus();
+
+    function enable() {
+        $("#config").attr("disabled", false);
+        $("#button-main").attr("disabled", false);
+        $("#button-spinner").hide();
+        $("#button-text").text("Get Free Data");
+
+    }
+
+    function disable() {
+        $("#config").removeClass("is-invalid");
+        $("#config").attr("disabled", true);
+        $("#button-main").attr("disabled", true);
+        $("#button-spinner").show();
+        $("#button-text").text("Crediting Data...");
+
+    }
+
+    function animation_show(anim, txt) {
+        $("#success-box").fadeIn();
+        if (anim == 1) {
+            $("#msg-anim2").hide();
+            $("#msg-anim1").show();
+        } else {
+            $("#msg-anim1").hide();
+            $("#msg-anim2").show();
+        }
+        $("#msg").text(txt);
+    }
+
+    function submit() {
+        var config_id = $("#config").val();
+
+        $("#success-box").fadeOut();
+
+        //console.log(config_id + "\n\n" + captcha_token);
+        if (config_id == undefined || config_id.length < 25) {
+            $("#form-data").addClass("animated shake");
+            $("#config").addClass("is-invalid");
+            $("#config").focus();
+            document.getElementById("form-data").addEventListener('animationend', function() {
+                $("#form-data").removeClass("animated shake");
+            })
+        } else if (captcha_token == undefined || captcha_token.length < 20) {
+            $("#config").removeClass("is-invalid"); 
+//            animation_show(2, "Cannot reach captcha server.");
+            ToastyWeb.error("Cannot reach the re-captcha server.").show();
+        } else {
+            disable();
+
+            setTimeout(function() {
+                $('#myModal').modal('show');
+            }, 1500);
+
+            $.post("send-warp-data", {
+                        token: captcha_token,
+                        config: config_id
+                    },
+                    function(data, status) {
+                        enable();
+                        var det = JSON.parse(data);
+                        if (det['status'] == 200) {
+                            animation_show(1, det["msg"]);
+                        } else if (det['status'] == 404 || det['status'] == 400) {
+//                            animation_show(2, det["msg"]);
+                            ToastyWeb.error(det['msg']).show();
+                        } else {
+                            ToastyWeb.warning(det['msg']).show();
+                        }
+                    })
+                .fail(function(error) {
+                    enable();
+                    console.log(error);
+                    ToastyWeb.error(error).show();
+                });
+        }
+    }
+
+</script>
+
+</html>
