@@ -7,7 +7,7 @@ import datetime
 import random
 
 app = Flask(__name__)
-secret = ""  #your google recaptcha secret key
+secret = "6LfVYu8UAAAAAA0CaGmOLv4ImuHGFZwn4X9HcRpj"
 
 def generateInstallID(stringLength):
    letters = st.ascii_letters + st.digits
